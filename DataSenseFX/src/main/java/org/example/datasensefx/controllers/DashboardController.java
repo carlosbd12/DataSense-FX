@@ -17,6 +17,7 @@ import org.example.datasensefx.utils.FxChartUtils;
 import org.example.datasensefx.utils.SceneManager;
 import org.example.datasensefx.utils.UserSession;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -261,19 +262,38 @@ public class DashboardController {
      */
     private void loadEnergyData() {
         try {
-            // Intentar cargar el archivo CSV de datos energéticos
-            Path csvPath = Path.of("src/main/resources/data/steel_industry_data.csv");
+            System.out.println("🔄 Iniciando carga de datos energéticos...");
 
-            // Si no existe, intentar con ruta alternativa
-            if (!csvPath.toFile().exists()) {
-                csvPath = Path.of("src/main/resources/data/sample.csv");
+            // Intentar primero cargar desde el classpath (recursos empaquetados)
+            try {
+                energyData = DataLoader.loadFromClasspath("/data/steel_industry_data.csv");
+                System.out.println("✓ Datos cargados desde classpath");
+            } catch (Exception e1) {
+                System.out.println("⚠ No se pudo cargar desde classpath, intentando con ruta del sistema de archivos...");
+
+                // Si falla, intentar con ruta del sistema de archivos (modo desarrollo)
+                Path csvPath = Path.of("src/main/resources/data/steel_industry_data.csv");
+
+                if (!csvPath.toFile().exists()) {
+                    // Intentar ruta alternativa
+                    csvPath = Path.of("DataSenseFX/src/main/resources/data/steel_industry_data.csv");
+                }
+
+                if (!csvPath.toFile().exists()) {
+                    csvPath = Path.of("src/main/resources/data/sample.csv");
+                }
+
+                if (csvPath.toFile().exists()) {
+                    energyData = DataLoader.loadFromCsv(csvPath);
+                    System.out.println("✓ Datos cargados desde sistema de archivos: " + csvPath);
+                } else {
+                    throw new IOException("No se encontró el archivo CSV en ninguna ubicación");
+                }
             }
-
-            // Cargar datos
-            energyData = DataLoader.loadFromCsv(csvPath);
 
             if (energyData == null || energyData.isEmpty()) {
                 System.err.println("⚠ No se pudieron cargar datos energéticos. Los gráficos no se mostrarán.");
+                showAlert("Error de datos", "No se pudieron cargar los datos energéticos. Verifica que el archivo CSV existe.");
                 return;
             }
 
@@ -289,6 +309,7 @@ public class DashboardController {
         } catch (Exception e) {
             System.err.println("✗ Error cargando datos energéticos: " + e.getMessage());
             e.printStackTrace();
+            showAlert("Error", "Error al cargar datos: " + e.getMessage());
         }
     }
 
