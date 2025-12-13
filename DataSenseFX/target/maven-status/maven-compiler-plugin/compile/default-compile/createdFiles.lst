@@ -1,0 +1,17 @@
+org/example/datasensefx/controllers/ConfigController.class
+org/example/datasensefx/services/MainController.class
+org/example/datasensefx/Main.class
+org/example/datasensefx/model/Measurement.class
+org/example/datasensefx/utils/DatabaseManager.class
+module-info.class
+org/example/datasensefx/controllers/DevicesController.class
+org/example/datasensefx/Launcher.class
+org/example/datasensefx/services/DataLoader.class
+org/example/datasensefx/controllers/LoginController.class
+org/example/datasensefx/utils/UserSession.class
+org/example/datasensefx/controllers/ReportsController.class
+org/example/datasensefx/utils/FxChartUtils.class
+org/example/datasensefx/controllers/DashboardController$1.class
+org/example/datasensefx/utils/SceneManager.class
+org/example/datasensefx/model/Rol.class
+org/example/datasensefx/controllers/DashboardController.class

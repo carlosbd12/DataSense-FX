@@ -1,0 +1,80 @@
+/* Estilos para gráficos JavaFX */
+
+/* Estilo general de los gráficos */
+.chart {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+/* Título del gráfico */
+.chart-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* Leyenda del gráfico */
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+/* Área del gráfico */
+.chart-content {
+    -fx-padding: 10px;
+}
+
+/* Ejes */
+.axis {
+    -fx-tick-label-fill: #666666;
+    -fx-font-size: 11px;
+}
+
+.axis-label {
+    -fx-text-fill: #333333;
+    -fx-font-size: 12px;
+}
+
+/* Líneas de gráfico */
+.chart-series-line {
+    -fx-stroke-width: 3px;
+    -fx-stroke: #2d9d4a;
+}
+
+/* Símbolos de datos en LineChart */
+.chart-line-symbol {
+    -fx-background-color: #2d9d4a, white;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* Barras de BarChart */
+.default-color0.chart-bar {
+    -fx-bar-fill: #2d9d4a;
+}
+
+.default-color1.chart-bar {
+    -fx-bar-fill: #4caf50;
+}
+
+.default-color2.chart-bar {
+    -fx-bar-fill: #66bb6a;
+}
+
+/* Grid lines */
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: #e0e0e0;
+    -fx-stroke-width: 0.5px;
+}
+
+/* Hover effects */
+.chart-line-symbol:hover {
+    -fx-background-color: #1b7a32, white;
+}
+
+.chart-bar:hover {
+    -fx-opacity: 0.8;
+}
+
