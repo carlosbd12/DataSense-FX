@@ -31,13 +31,13 @@
 
             <!-- Navigation Menu -->
             <VBox spacing="5" style="-fx-padding: 10;">
-                <Button fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity" style="-fx-background-color: #4a5f6f; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;" text="⌂  Inicio">
+                <Button fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity" style="-fx-background-color: #4a5f6f; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;" text="🏠  Inicio">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Button>
 
-                <Button fx:id="btnDispositivos" alignment="CENTER_LEFT" maxWidth="Infinity" style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0; -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;" text="◉  Dispositivos">
+                <Button fx:id="btnDispositivos" alignment="CENTER_LEFT" maxWidth="Infinity" style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0; -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;" text="💡  Dispositivos">
                     <font>
                         <Font size="13.0" />
                     </font>

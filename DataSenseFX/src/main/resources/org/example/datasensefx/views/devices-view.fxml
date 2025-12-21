@@ -31,7 +31,7 @@
                 <Button fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
-                        text="⌂  Inicio">
+                        text="🏠  Inicio">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -41,7 +41,7 @@
                 <Button fx:id="btnDispositivos" alignment="CENTER_LEFT" maxWidth="Infinity"
                         style="-fx-background-color: #4a5f6f; -fx-text-fill: white;
                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
-                        text="◉  Dispositivos">
+                        text="💡  Dispositivos">
                     <font>
                         <Font size="13.0" />
                     </font>

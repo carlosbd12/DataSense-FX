@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane style="-fx-background-color: #f5f5f5;"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.datasensefx.controllers.ReportDetailController">
+
+    <!-- Sidebar -->
+    <left>
+        <VBox spacing="0"
+              style="-fx-background-color: #3d4f5d; -fx-pref-width: 200;">
+
+            <!-- Logo / Título -->
+            <VBox alignment="CENTER" spacing="5"
+                  style="-fx-padding: 20 10;">
+                <Label text="Empresa XYZ" textFill="white">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+            </VBox>
+
+            <!-- Botones de navegación -->
+            <VBox spacing="5" style="-fx-padding: 10;">
+                <Button fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
+                               -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
+                        text="🏠  Inicio">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
+
+                <Button fx:id="btnDispositivos" alignment="CENTER_LEFT" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
+                               -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
+                        text="💡  Dispositivos">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
+
+                <Button fx:id="btnInformes" alignment="CENTER_LEFT" maxWidth="Infinity"
+                        style="-fx-background-color: #4a5f6f; -fx-text-fill: white;
+                               -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
+                        text="📊  Informes">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
+
+                <Button fx:id="btnConfiguracion" alignment="CENTER_LEFT" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
+                               -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
+                        text="⚙  Configuración">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
+            </VBox>
+
+            <!-- Spacer -->
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- Botón de cerrar sesión -->
+            <VBox style="-fx-padding: 20;">
+                <Button alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleLogout"
+                        style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
+                               -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;
+                               -fx-border-color: #4a5f6f; -fx-border-width: 1; -fx-border-radius: 5;"
+                        text="← Cerrar Sesión">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Button>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <BorderPane>
+            <!-- Top Header -->
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="20.0"
+                      style="-fx-background-color: white; -fx-padding: 20;
+                             -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
+                    
+                    <!-- Botón volver -->
+                    <Button fx:id="btnVolver"
+                            onAction="#handleVolver"
+                            text="← Volver a Informes"
+                            style="-fx-background-color: #6c757d; -fx-text-fill: white;
+                                   -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 8 16;">
+                        <font>
+                            <Font size="12.0" />
+                        </font>
+                    </Button>
+                    
+                    <Label fx:id="lblReportTitle" text="Detalle del Informe" textFill="#333333">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
+                    
+                    <Region HBox.hgrow="ALWAYS" />
+                    
+                    <!-- Botón exportar PDF -->
+                    <Button fx:id="btnExportPDF"
+                            onAction="#handleExportPDF"
+                            text="📄 Exportar PDF"
+                            style="-fx-background-color: #dc3545; -fx-text-fill: white;
+                                   -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 8 16;">
+                        <font>
+                            <Font size="12.0" />
+                        </font>
+                    </Button>
+                    
+                    <Label fx:id="lblUserName" text="usuario ▼" textFill="#666666">
+                        <font>
+                            <Font size="13.0" />
+                        </font>
+                    </Label>
+                </HBox>
+            </top>
+
+            <!-- Scrollable Content -->
+            <center>
+                <ScrollPane fitToWidth="true"
+                            style="-fx-background: #f5f5f5; -fx-background-color: #f5f5f5;">
+                    <VBox spacing="20" style="-fx-padding: 25;">
+
+                        <!-- Información del informe -->
+                        <VBox spacing="10"
+                              style="-fx-background-color: white; -fx-background-radius: 8;
+                                     -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08),
+                                                                              8, 0, 0, 2);">
+                            <Label fx:id="lblReportType" text="Tipo de Informe" textFill="#666666">
+                                <font>
+                                    <Font size="11.0" />
+                                </font>
+                            </Label>
+                            <Label fx:id="lblReportPeriod" text="Período: -" textFill="#333333">
+                                <font>
+                                    <Font name="System Bold" size="13.0" />
+                                </font>
+                            </Label>
+                            <Label fx:id="lblGeneratedAt" text="Generado: -" textFill="#999999">
+                                <font>
+                                    <Font size="11.0" />
+                                </font>
+                            </Label>
+                        </VBox>
+
+                        <!-- Contenido del informe -->
+                        <VBox spacing="10"
+                              style="-fx-background-color: white; -fx-background-radius: 8;
+                                     -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08),
+                                                                              8, 0, 0, 2);">
+                            <Label text="Contenido del Informe" textFill="#333333">
+                                <font>
+                                    <Font name="System Bold" size="14.0" />
+                                </font>
+                            </Label>
+                            
+                            <TextArea fx:id="txtReportContent"
+                                      editable="false"
+                                      wrapText="true"
+                                      style="-fx-font-family: 'Courier New'; -fx-font-size: 12;
+                                             -fx-control-inner-background: #f8f9fa;"
+                                      prefRowCount="30">
+                            </TextArea>
+                        </VBox>
+
+                    </VBox>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>
+

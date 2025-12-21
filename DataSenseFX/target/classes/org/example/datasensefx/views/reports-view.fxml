@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -31,7 +32,7 @@
                 <Button fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
-                        text="⌂  Inicio">
+                        text="🏠  Inicio">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -40,7 +41,7 @@
                 <Button fx:id="btnDispositivos" alignment="CENTER_LEFT" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
-                        text="◉  Dispositivos">
+                        text="💡  Dispositivos">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -134,38 +135,48 @@
                         <VBox spacing="10">
 
                             <!-- Informe diario -->
-                            <HBox spacing="15"
+                            <VBox spacing="10"
                                   style="-fx-background-color: white; -fx-background-radius: 8;
                                          -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05),
                                                                                   6, 0, 0, 1);">
-                                <VBox spacing="4">
-                                    <Label text="Informe diario de consumo" textFill="#333333">
-                                        <font>
-                                            <Font name="System Bold" size="13.0" />
-                                        </font>
-                                    </Label>
-                                    <Label text="Resumen del consumo energético de las últimas 24 horas."
-                                           textFill="#666666" wrapText="true">
+                                <HBox spacing="15" alignment="CENTER_LEFT">
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Informe diario de consumo" textFill="#333333">
+                                            <font>
+                                                <Font name="System Bold" size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Resumen del consumo energético de un día específico (24 horas)."
+                                               textFill="#666666" wrapText="true">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </Label>
+                                    </VBox>
+                                </HBox>
+
+                                <HBox spacing="10" alignment="CENTER_LEFT">
+                                    <Label text="📅 Seleccionar fecha:" textFill="#666666">
                                         <font>
                                             <Font size="11.0" />
                                         </font>
                                     </Label>
-                                    <Label text="Periodo: último día" textFill="#999999">
+                                    <DatePicker fx:id="dpDailyReport"
+                                                promptText="Seleccione un día"
+                                                style="-fx-pref-width: 150;">
+                                    </DatePicker>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="btnDailyReport"
+                                            text="📄 Ver informe"
+                                            onAction="#handleVerInformeDiario"
+                                            style="-fx-background-color: #0066cc; -fx-text-fill: white;
+                                                   -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 6 12;">
                                         <font>
-                                            <Font size="10.0" />
+                                            <Font size="11.0" />
                                         </font>
-                                    </Label>
-                                </VBox>
-                                <Region HBox.hgrow="ALWAYS" />
-                                <Button text="📄 Ver informe"
-                                        onAction="#handleVerInforme"
-                                        style="-fx-background-color: #0066cc; -fx-text-fill: white;
-                                               -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 6 12;">
-                                    <font>
-                                        <Font size="11.0" />
-                                    </font>
-                                </Button>
-                            </HBox>
+                                    </Button>
+                                </HBox>
+                            </VBox>
 
                             <!-- Informe semanal por zonas -->
                             <HBox spacing="15"
@@ -191,8 +202,9 @@
                                     </Label>
                                 </VBox>
                                 <Region HBox.hgrow="ALWAYS" />
-                                <Button text="📄 Ver informe"
-                                        onAction="#handleVerInforme"
+                                <Button fx:id="btnWeeklyReport"
+                                        text="📄 Ver informe"
+                                        onAction="#handleVerInformeSemanal"
                                         style="-fx-background-color: #0066cc; -fx-text-fill: white;
                                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 6 12;">
                                     <font>
@@ -225,8 +237,9 @@
                                     </Label>
                                 </VBox>
                                 <Region HBox.hgrow="ALWAYS" />
-                                <Button text="📄 Ver informe"
-                                        onAction="#handleVerInforme"
+                                <Button fx:id="btnMonthlyReport"
+                                        text="📄 Ver informe"
+                                        onAction="#handleVerInformeMensual"
                                         style="-fx-background-color: #0066cc; -fx-text-fill: white;
                                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 6 12;">
                                     <font>
@@ -259,8 +272,9 @@
                                     </Label>
                                 </VBox>
                                 <Region HBox.hgrow="ALWAYS" />
-                                <Button text="📄 Ver informe"
-                                        onAction="#handleVerInforme"
+                                <Button fx:id="btnEfficiencyReport"
+                                        text="📄 Ver informe"
+                                        onAction="#handleVerInformeEficiencia"
                                         style="-fx-background-color: #0066cc; -fx-text-fill: white;
                                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 6 12;">
                                     <font>
