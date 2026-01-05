@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -38,20 +38,20 @@
             </font>
         </Label>
 
-        <!-- Usuario (ComboBox) -->
+        <!-- Usuario (TextField) -->
         <VBox spacing="8.0">
-            <Label text="Usuario">
+            <Label text="Usuario o Email">
                 <font>
                     <Font size="12.0" />
                 </font>
             </Label>
-            <ComboBox fx:id="userComboBox"
-                      promptText="Selecciona un usuario"
-                      style="-fx-background-radius: 5; -fx-border-color: #e0e0e0; -fx-border-radius: 5;">
+            <TextField fx:id="emailTextField"
+                       promptText="admin o admin@datasense.com"
+                       style="-fx-background-radius: 5; -fx-border-color: #e0e0e0; -fx-border-radius: 5;">
                 <padding>
-                    <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
-            </ComboBox>
+            </TextField>
         </VBox>
 
         <!-- Contraseña -->

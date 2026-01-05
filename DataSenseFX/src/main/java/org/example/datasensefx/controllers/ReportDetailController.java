@@ -5,11 +5,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.stage.FileChooser;
 import org.example.datasensefx.model.Report;
 import org.example.datasensefx.model.Rol;
+import org.example.datasensefx.services.PDFExportService;
 import org.example.datasensefx.utils.SceneManager;
 import org.example.datasensefx.utils.UserSession;
 
+import java.io.File;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -65,7 +68,12 @@ public class ReportDetailController {
         btnDispositivos.setOnAction(event -> handleDispositivos());
         btnInformes.setOnAction(event -> handleInformes());
         btnConfiguracion.setOnAction(event -> handleConfiguracion());
-        
+
+        // Vincular explícitamente el botón de exportar si no se hace solo por FXML
+        if (btnExportPDF != null) {
+            btnExportPDF.setOnAction(event -> handleExportPDF());
+        }
+
         // Datos de sesión
         UserSession session = UserSession.getInstance();
         
@@ -140,11 +148,78 @@ public class ReportDetailController {
      */
     @FXML
     private void handleExportPDF() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Exportar PDF");
-        alert.setHeaderText(null);
-        alert.setContentText("La funcionalidad de exportación a PDF estará disponible próximamente.");
-        alert.showAndWait();
+        if (currentReport == null) {
+            showAlert("Error", "No hay ningún informe para exportar");
+            return;
+        }
+
+        try {
+            // FileChooser para seleccionar ubicación
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar informe como PDF");
+
+            // Nombre sugerido del archivo
+            String suggestedFileName = generateFileName(currentReport);
+            fileChooser.setInitialFileName(suggestedFileName);
+
+            // Filtro de extensión
+            FileChooser.ExtensionFilter extFilter =
+                    new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            // Mostrar diálogo
+            File file = fileChooser.showSaveDialog(btnExportPDF.getScene().getWindow());
+
+            if (file != null) {
+                // Asegurar extensión .pdf
+                if (!file.getName().toLowerCase().endsWith(".pdf")) {
+                    file = new File(file.getAbsolutePath() + ".pdf");
+                }
+
+                // Exportar usando el servicio
+                PDFExportService pdfService = new PDFExportService();
+                boolean success = pdfService.exportToPDF(currentReport, file);
+
+                if (success) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Exportación exitosa");
+                    alert.setHeaderText(null);
+                    alert.setContentText("El informe se ha exportado correctamente a:\n" + file.getAbsolutePath());
+                    alert.showAndWait();
+                } else {
+                    showAlert("Error al exportar",
+                            "No se pudo generar el contenido del PDF. Verifique los datos del informe.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error Crítico", "Ocurrió un error inesperado al exportar: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Genera un nombre de archivo basado en el tipo de informe y fecha
+     */
+    private String generateFileName(Report report) {
+        String prefix = "";
+
+        switch (report.getType()) {
+            case DAILY:
+                prefix = "Informe_Diario";
+                break;
+            case WEEKLY:
+                prefix = "Informe_Semanal";
+                break;
+            case MONTHLY:
+                prefix = "Informe_Mensual";
+                break;
+            case EFFICIENCY:
+                prefix = "Informe_Eficiencia";
+                break;
+        }
+
+        String period = report.getPeriod().replaceAll("[/\\s:]", "_");
+        return prefix + "_" + period + ".pdf";
     }
     
     /**

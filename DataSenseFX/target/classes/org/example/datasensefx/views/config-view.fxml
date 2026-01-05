@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane style="-fx-background-color: #f5f5f5;"
@@ -23,9 +16,7 @@
             <!-- Logo/Brand -->
             <VBox alignment="CENTER" style="-fx-padding: 25 20 25 20;">
                 <Label text="Empresa XYZ" textFill="white">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
+                    <font><Font name="System Bold" size="18.0" /></font>
                 </Label>
             </VBox>
 
@@ -34,54 +25,42 @@
                 <Button fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
-                        text="🏠  Inicio">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
+                        text="⌂  Inicio">
+                    <font><Font size="13.0" /></font>
                 </Button>
 
                 <Button fx:id="btnDispositivos" alignment="CENTER_LEFT" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
-                        text="💡  Dispositivos">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
+                        text="◉  Dispositivos">
+                    <font><Font size="13.0" /></font>
                 </Button>
 
                 <Button fx:id="btnInformes" alignment="CENTER_LEFT" maxWidth="Infinity"
                         style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
                         text="📊  Informes">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
+                    <font><Font size="13.0" /></font>
                 </Button>
 
-                <!-- Estamos en Configuración → la marcamos como activa -->
                 <Button fx:id="btnConfiguracion" alignment="CENTER_LEFT" maxWidth="Infinity"
                         style="-fx-background-color: #4a5f6f; -fx-text-fill: white;
                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;"
                         text="⚙  Configuración">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
+                    <font><Font size="13.0" /></font>
                 </Button>
             </VBox>
 
-            <!-- Spacer -->
             <Region VBox.vgrow="ALWAYS" />
 
-            <!-- Logout Button at Bottom -->
+            <!-- Logout Button -->
             <VBox style="-fx-padding: 20;">
                 <Button alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleLogout"
                         style="-fx-background-color: transparent; -fx-text-fill: #b8c5d0;
                                -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 12 20;
                                -fx-border-color: #4a5f6f; -fx-border-width: 1; -fx-border-radius: 5;"
                         text="← Cerrar Sesión">
-                    <font>
-                        <Font size="12.0" />
-                    </font>
+                    <font><Font size="12.0" /></font>
                 </Button>
             </VBox>
         </VBox>
@@ -95,16 +74,12 @@
                 <HBox alignment="CENTER_LEFT" spacing="20.0"
                       style="-fx-background-color: white; -fx-padding: 20;
                              -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
-                    <Label text="Panel de configuración" textFill="#333333">
-                        <font>
-                            <Font name="System Bold" size="16.0" />
-                        </font>
+                    <Label text="Gestión de Usuarios" textFill="#333333">
+                        <font><Font name="System Bold" size="16.0" /></font>
                     </Label>
                     <Region HBox.hgrow="ALWAYS" />
                     <Label fx:id="lblUserName" text="Admin ▼" textFill="#666666">
-                        <font>
-                            <Font size="13.0" />
-                        </font>
+                        <font><Font size="13.0" /></font>
                     </Label>
                 </HBox>
             </top>
@@ -115,97 +90,103 @@
                             style="-fx-background: #f5f5f5; -fx-background-color: #f5f5f5;">
                     <VBox spacing="20" style="-fx-padding: 25;">
 
-                        <!-- Info card -->
-                        <VBox spacing="10"
+                        <!-- SECCIÓN 1: FORMULARIO AÑADIR/EDITAR -->
+                        <VBox spacing="15"
                               style="-fx-background-color: white; -fx-background-radius: 8;
-                                     -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08),
-                                                                              8, 0, 0, 2);">
-                            <Label text="Gestión de la plataforma" textFill="#333333">
-                                <font>
-                                    <Font name="System Bold" size="14.0" />
-                                </font>
+                                     -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);">
+
+                            <Label text="Añadir/Editar Usuario" textFill="#333333">
+                                <font><Font name="System Bold" size="14.0" /></font>
                             </Label>
-                            <Label fx:id="lblAdminInfo"
-                                   text="Solo el administrador puede acceder a este panel."
-                                   textFill="#666666" wrapText="true">
-                                <font>
-                                    <Font size="12.0" />
-                                </font>
+
+                            <!-- Fila 1: Username, Email, Nombre -->
+                            <HBox spacing="15">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Usuario *">
+                                        <font><Font size="12.0" /></font>
+                                    </Label>
+                                    <TextField fx:id="txtUsername" promptText="ej: jgarcia"
+                                               style="-fx-border-color: #e0e0e0; -fx-border-radius: 4; -fx-padding: 8;">
+                                    </TextField>
+                                </VBox>
+
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Email *">
+                                        <font><Font size="12.0" /></font>
+                                    </Label>
+                                    <TextField fx:id="txtEmail" promptText="usuario@ejemplo.com"
+                                               style="-fx-border-color: #e0e0e0; -fx-border-radius: 4; -fx-padding: 8;">
+                                    </TextField>
+                                </VBox>
+
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Nombre completo *">
+                                        <font><Font size="12.0" /></font>
+                                    </Label>
+                                    <TextField fx:id="txtNombre" promptText="Juan García"
+                                               style="-fx-border-color: #e0e0e0; -fx-border-radius: 4; -fx-padding: 8;">
+                                    </TextField>
+                                </VBox>
+                            </HBox>
+
+                            <!-- Fila 2: Rol -->
+                            <VBox spacing="5" maxWidth="300">
+                                <Label text="Rol *">
+                                    <font><Font size="12.0" /></font>
+                                </Label>
+                                <ComboBox fx:id="cbRol" promptText="Seleccionar rol" maxWidth="Infinity"
+                                          style="-fx-border-color: #e0e0e0; -fx-border-radius: 4;">
+                                </ComboBox>
+                            </VBox>
+
+                            <!-- Botones -->
+                            <HBox spacing="10">
+                                <Button fx:id="btnAñadir" text="Añadir Usuario" onAction="#handleAñadirUsuario"
+                                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;
+                                               -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 10 20;">
+                                    <font><Font name="System Bold" size="12.0" /></font>
+                                </Button>
+
+                                <Button fx:id="btnActualizar" text="Actualizar Usuario" onAction="#handleActualizarUsuario"
+                                        visible="false" managed="false"
+                                        style="-fx-background-color: #2196F3; -fx-text-fill: white;
+                                               -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 10 20;">
+                                    <font><Font name="System Bold" size="12.0" /></font>
+                                </Button>
+
+                                <Button fx:id="btnCancelar" text="Cancelar" onAction="#handleCancelar"
+                                        visible="false" managed="false"
+                                        style="-fx-background-color: #9E9E9E; -fx-text-fill: white;
+                                               -fx-background-radius: 5; -fx-cursor: hand; -fx-padding: 10 20;">
+                                    <font><Font size="12.0" /></font>
+                                </Button>
+                            </HBox>
+
+                            <Label text="* Campos obligatorios" textFill="#999999">
+                                <font><Font size="11.0" /></font>
                             </Label>
                         </VBox>
 
-                        <!-- Tabla sencilla de usuarios/roles -->
+                        <!-- SECCIÓN 2: TABLA DE USUARIOS -->
                         <VBox spacing="10"
                               style="-fx-background-color: white; -fx-background-radius: 8;
-                                     -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08),
-                                                                              8, 0, 0, 2);">
-                            <Label text="Usuarios y roles configurados" textFill="#333333">
-                                <font>
-                                    <Font name="System Bold" size="14.0" />
-                                </font>
+                                     -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);">
+
+                            <Label text="Listado de Usuarios" textFill="#333333">
+                                <font><Font name="System Bold" size="14.0" /></font>
                             </Label>
 
-                            <GridPane hgap="10" vgap="8">
-                                <columnConstraints>
-                                    <ColumnConstraints percentWidth="30" />
-                                    <ColumnConstraints percentWidth="30" />
-                                    <ColumnConstraints percentWidth="40" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                </rowConstraints>
-
-                                <!-- Cabecera -->
-                                <Label text="Usuario" textFill="#666666" GridPane.columnIndex="0">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Rol" textFill="#666666" GridPane.columnIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Acceso principal" textFill="#666666" GridPane.columnIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-
-                                <!-- Fila 1: Operador -->
-                                <Label text="operador" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                                <Label text="Responsable energético de planta"
-                                       GridPane.rowIndex="1" GridPane.columnIndex="1" />
-                                <Label text="Dashboard, Dispositivos, Informes"
-                                       GridPane.rowIndex="1" GridPane.columnIndex="2" />
-
-                                <!-- Fila 2: Gestor -->
-                                <Label text="gestor" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                                <Label text="Gestor de edificio corporativo"
-                                       GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                                <Label text="Dashboard e Informes"
-                                       GridPane.rowIndex="2" GridPane.columnIndex="2" />
-
-                                <!-- Fila 3: Admin -->
-                                <Label text="admin" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-                                <Label text="Administrador de la plataforma"
-                                       GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                                <Label text="Acceso completo (incl. Configuración)"
-                                       GridPane.rowIndex="3" GridPane.columnIndex="2" />
-                            </GridPane>
-
-                            <!-- Botones “futuros” deshabilitados -->
-                            <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
-                                <Button text="Añadir usuario" disable="true"
-                                        style="-fx-background-radius: 5; -fx-padding: 8 16;" />
-                                <Button text="Editar seleccionado" disable="true"
-                                        style="-fx-background-radius: 5; -fx-padding: 8 16;" />
-                                <Button text="Eliminar seleccionado" disable="true"
-                                        style="-fx-background-radius: 5; -fx-padding: 8 16;" />
-                            </HBox>
+                            <TableView fx:id="tableUsuarios" style="-fx-border-color: #e0e0e0;">
+                                <columns>
+                                    <TableColumn fx:id="colUsername" text="Usuario" prefWidth="100" />
+                                    <TableColumn fx:id="colEmail" text="Email" prefWidth="180" />
+                                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="150" />
+                                    <TableColumn fx:id="colRol" text="Rol" prefWidth="180" />
+                                    <TableColumn fx:id="colEstado" text="Estado" prefWidth="100" />
+                                    <TableColumn fx:id="colFechaCreacion" text="Fecha Creación" prefWidth="110" />
+                                    <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="180" />
+                                </columns>
+                            </TableView>
                         </VBox>
 
                     </VBox>

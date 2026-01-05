@@ -3,14 +3,14 @@ package org.example.datasensefx.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import org.example.datasensefx.model.Rol;
+import org.example.datasensefx.model.User;
+import org.example.datasensefx.services.AuthService;
 import org.example.datasensefx.utils.SceneManager;
-import org.example.datasensefx.utils.UserSession;
 
 public class LoginController {
 
     @FXML
-    private ComboBox<String> userComboBox;   // 👈 ahora usamos ComboBox
+    private TextField emailTextField;
 
     @FXML
     private PasswordField passwordField;
@@ -21,14 +21,14 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
+    private AuthService authService;
+
     @FXML
     public void initialize() {
-        // Rellenamos el combo con los usuarios de demo
-        userComboBox.getItems().addAll("operador", "gestor", "admin");
-        userComboBox.getSelectionModel().selectFirst(); // selecciona el primero por defecto
+        authService = new AuthService();
 
-        // ENTER en el combo → pasar al campo password
-        userComboBox.setOnKeyPressed(event -> {
+        // ENTER en el campo email → pasar al campo password
+        emailTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 passwordField.requestFocus();
             }
@@ -44,58 +44,34 @@ public class LoginController {
 
     @FXML
     private void handleLogin() {
-
-        String usuario = userComboBox.getValue();
+        String email = emailTextField.getText();
         String password = passwordField.getText();
 
-        if (usuario == null || usuario.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "Por favor selecciona un usuario y escribe la contraseña");
+        if (email == null || email.trim().isEmpty() || password.isEmpty()) {
+            showAlert("Error", "Por favor ingresa tu email y contraseña");
             return;
         }
 
-        // Ahora authenticate devuelve un Rol (o null si las credenciales son incorrectas)
-        Rol rol = authenticate(usuario, password);
+        // Autenticar con la base de datos
+        User user = authService.login(email.trim(), password);
 
-        if (rol != null) {
+        if (user != null) {
             try {
-                UserSession session = UserSession.getInstance();
-                // Guardamos el "usuario" (operador/gestor/admin) como email para mostrarlo en la UI
-                session.setUserEmail(usuario);
-                session.setRol(rol);
-
+                // La sesión ya fue guardada por AuthService.login()
                 SceneManager.switchScene(
                         "/org/example/datasensefx/views/dashboard-view.fxml",
                         "DataSense - Dashboard",
                         1000,
                         700
                 );
+                System.out.println("✅ Login exitoso: " + user.getEmail() + " - " + user.getRol());
             } catch (Exception e) {
                 e.printStackTrace();
-                showAlert("Error", "No se pudo cargar el dashboard");
+                showAlert("Error", "No se pudo cargar el dashboard: " + e.getMessage());
             }
         } else {
-            showAlert("Error", "Credenciales incorrectas");
+            showAlert("Error", "Email o contraseña incorrectos");
         }
-    }
-
-    /**
-     * Devuelve el rol asociado a las credenciales o null si son incorrectas.
-     * Más adelante aquí irá la consulta real a la base de datos.
-     */
-    private Rol authenticate(String usuario, String password) {
-        // Usuarios de prueba, uno por cada rol del sistema
-        if (usuario.equals("operador") && password.equals("operador")) {
-            return Rol.RESPONSABLE_PLANTA;
-        }
-        if (usuario.equals("gestor") && password.equals("gestor")) {
-            return Rol.GESTOR_EDIFICIO;
-        }
-        if (usuario.equals("admin") && password.equals("admin")) {
-            return Rol.ADMIN_PLATAFORMA;
-        }
-
-        // Credenciales incorrectas
-        return null;
     }
 
     @FXML

@@ -26,7 +26,7 @@ public class Main extends Application {
                 Main.class.getResource("/org/example/datasensefx/views/login-view.fxml")
         );
 
-        // 👇 Login ya al mismo tamaño que el dashboard
+        // Login ya al mismo tamaño que el dashboard
         Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
         stage.setTitle("DataSense - Iniciar Sesión");
         stage.setScene(scene);

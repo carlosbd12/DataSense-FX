@@ -7,6 +7,8 @@ module org.example.datasensefx {
     requires java.sql;
     requires com.zaxxer.hikari;
     requires org.apache.commons.csv;
+    requires java.desktop;
+    requires com.github.librepdf.openpdf;
 
     opens org.example.datasensefx to javafx.fxml;
     opens org.example.datasensefx.controllers to javafx.fxml;
